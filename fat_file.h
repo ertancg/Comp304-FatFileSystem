@@ -21,6 +21,8 @@ typedef struct t_FAT_FILE {
 	std::vector<int> block_ids; // Data blocks.
 
 	std::vector<const FAT_OPEN_FILE*> open_handles; // One entry each time this file is opened.
+
+	int metadata_offset;
 } FAT_FILE;
 
 typedef struct t_FAT_FILESYSTEM FAT_FILESYSTEM; // Forward definition.

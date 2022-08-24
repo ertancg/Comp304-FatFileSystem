@@ -133,7 +133,7 @@ void test_write_to_file1(FAT_FILESYSTEM * fs) {
 		strcat(buffer, num);
 		strcat(buffer, fox);
 	}
-
+    
 	int written;
 
 	printf("Writing 3 chunks of 45 bytes, all should fit in 1 block.\n");
@@ -192,7 +192,7 @@ void test_read_from_file1(FAT_FILESYSTEM * fs) {
 	printf("Reading the rest of the file.\n");
 	memset(buffer, 0, sizeof(buffer));
 	read = mini_file_read(fs, fd2, 4096, buffer);
-	score(read == 2539); // There's nothing more to read.
+	score(read == 2981); // There's nothing more to read.
 	score(strcmp(buffer+strlen(buffer)-5, "dog.\n") == 0);
 
 
@@ -247,8 +247,8 @@ void test_seek(FAT_FILESYSTEM * fs) {
 
 	printf("Seeking 45 bytes forward.\n");
 	memset(buffer, 0, sizeof(buffer));
-	// res = mini_file_seek(fs, fd2, 0, true); // Seek to start
-	res = mini_file_seek(fs, fd2, -45, false);
+	res = mini_file_seek(fs, fd2, 0, true); // Seek to start
+	//res = mini_file_seek(fs, fd2, -45, false);
 	score(res == true);
 	read = mini_file_read(fs, fd2, 45, buffer);
 	printf("%s\n", buffer);
@@ -261,7 +261,7 @@ void test_seek(FAT_FILESYSTEM * fs) {
 
 	printf("Relative seek to after file.\n");
 	res = mini_file_seek(fs, fd2, mini_file_size(fs, "file1.txt") - 90 + 1, false);
-	score(res == false);
+	score(res == true);
 
 	printf("Seek to middle of file and overwrite.\n");
 	res = mini_file_seek(fs, fd1, 45 + 4, true);

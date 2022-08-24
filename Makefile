@@ -10,7 +10,7 @@ CXX = g++ -Wall
 	$(CXX) -c -o $@ $<
 
 build: $(OBJ)
-	$(CXX) -o $(NAME) $(OBJ)
+	$(CXX) -g -o $(NAME) $(OBJ)
 
 clean:
 	rm -vf $(NAME) $(OBJ)
